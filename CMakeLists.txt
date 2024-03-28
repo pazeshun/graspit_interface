@@ -16,7 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-find_package(Qt4 COMPONENTS QtCore  REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -153,7 +153,6 @@ catkin_package(
 ## Build ##
 ###########
 
-include(${QT_USE_FILE})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 ## Specify additional locations of header files
@@ -167,7 +166,7 @@ ADD_DEFINITIONS(${QT_DEFINITIONS})
 set(MOCS
     include/graspit_interface.h)
 
-qt4_wrap_cpp(GENERATED_SOURCES ${MOCS})
+qt5_wrap_cpp(GENERATED_SOURCES ${MOCS})
 
 ## Declare a C++ library
 # add_library(graspit_interface
@@ -195,6 +194,7 @@ add_dependencies(graspit_interface ${PROJECT_NAME}_gencpp)
 target_link_libraries(graspit_interface
   ${catkin_LIBRARIES}
   ${QT_LIBRARIES}
+  Qt5::Core Qt5::Widgets
 )
 
 #############
